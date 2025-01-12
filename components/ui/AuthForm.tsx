@@ -47,10 +47,22 @@ const AuthForm = ({type}:{type: string}) => {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         setisLoading(true)
+
         try {
-            //Appwrite
+            const userData = {
+                firstName: data.firstName!,
+                lastName: data.lastName!,
+                address1: data.address1!,
+                city:data.city!,
+                state: data.state!,
+                postalCode:data.postalCode!,
+                dateOfBirth:data.dateOfBirth!,
+                ssn:data.ssn!,
+                email:data.email,
+                password:data.password
+            }
             if(type === 'sign-up'){
-                const newUser = await signUp(data);
+                const newUser = await signUp(userData);
                 setUser(newUser);
             }
             if(type === 'sign-in'){
@@ -99,7 +111,7 @@ const AuthForm = ({type}:{type: string}) => {
             <div className='flex flex-col gap-4'>
                 <PlaidLink user = {user} variant = "primary"/>
             </div>
-        ):
+        ) : 
         <>
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
